@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片爆炸</title>
+	<style type="text/css">
+		#main{
+			width: 300px;
+			height: 200px;
+			background-size: 300px 200px;
+			margin: 100px auto;
+			position: relative;
+		}
+		#main div{
+			width: 30px;
+			height: 20px;
+			background-image: url("1.JPG");
+			background-size: 300px 200px;
+			position: absolute;
+			top:0px;
+		}
+		div.ret{
+			/*opacity: 1 !important;*/
+			transform:translate(0px 0px) rotate(0deg) scale(1) !important;
+			-webkit-transform: translate(0px,0px) rotate(0deg) scale(1) !important;
+			transition:all  2s ease;
+		}
+		#btn{
+			width: 100px;height: 50px;background-color: gray;font-size: 20px;text-align: center;line-height: 50px;font-weight: bolder;
+			border-radius: 25px;
+			margin: auto;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="main">
+	</div>
+	<div id="btn">bottom</div>
+</body>
+<script type="text/javascript">
+	var omain=document.getElementById("main");
+	var obtn=document.getElementById("btn");
+	var oimgarr=omain.children;
+	function rand(min,max){
+		return(parseInt(Math.random()*(max-min+1)+min));
+	}
+
+	obtn.onclick=function boom(){
+	for(var i=0;i<10;i++){
+			var l=0;
+		for(var j=0;j<10;j++){
+			var oimg=document.createElement("div");
+			omain.appendChild(oimg);
+			oimg.style.top=i*20+"px";
+			oimg.style.left=j*30+"px";
+			oimg.style.opacity = rand(1,2)*0.5;
+			oimg.style.backgroundPosition="-"+j*30+"px -"+i*20+"px";
+			oimg.style.transform="translate("+rand(-200,200)+"px,"+rand(-200,200)+"px) rotate("+rand(-200,200)+"deg) scale("+rand(1,2)+")";
+			setTimeout(function () {
+		for (var i = 0; i < omain.children.length; i++) {
+			omain.children[i].classList.add('ret');
+		}
+
+	},2000);
+
+		}	
+	}}
+	
+
+</script>
+</html>
